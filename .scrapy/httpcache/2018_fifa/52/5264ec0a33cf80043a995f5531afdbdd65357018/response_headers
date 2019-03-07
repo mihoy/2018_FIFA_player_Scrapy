@@ -1,0 +1,21 @@
+Date: Wed, 06 Mar 2019 10:16:31 GMT
+Content-Type: text/html; charset=utf-8
+Server: mw1325.eqiad.wmnet
+X-Powered-By: HHVM/3.18.6-dev
+P3P: CP="This is not a P3P policy! See https://www.wikidata.org/wiki/Special:CentralAutoLogin/P3P for more info."
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+X-Content-Type-Options: nosniff
+Location: https://www.wikidata.org/wiki/Q982163
+Last-Modified: Wed, 06 Mar 2019 10:16:31 GMT
+Backend-Timing: D=37391 t=1551867391511639
+Vary: Accept-Encoding,X-Forwarded-Proto,Cookie,Authorization,X-Seven
+X-Varnish: 377723537, 838903289, 337415586, 343083186
+Via: 1.1 varnish (Varnish/5.1), 1.1 varnish (Varnish/5.1), 1.1 varnish (Varnish/5.1), 1.1 varnish (Varnish/5.1)
+Age: 0
+X-Cache: cp1085 pass, cp2004 pass, cp4028 pass, cp4031 pass
+X-Cache-Status: pass
+Server-Timing: cache;desc="pass"
+Strict-Transport-Security: max-age=106384710; includeSubDomains; preload
+X-Analytics: WMF-Last-Access=06-Mar-2019;WMF-Last-Access-Global=06-Mar-2019;https=1
+X-Client-Ip: 67.180.215.217
+Cache-Control: private, s-maxage=0, max-age=0, must-revalidate

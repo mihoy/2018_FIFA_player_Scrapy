@@ -1,0 +1,10 @@
+Date: Thu, 07 Mar 2019 03:45:13 GMT
+Server: Varnish
+X-Varnish: 546080670
+X-Cache: cp4031 int
+X-Cache-Status: int-front
+Server-Timing: cache;desc="int-front"
+Set-Cookie: WMF-Last-Access=07-Mar-2019;Path=/;HttpOnly;secure;Expires=Mon, 08 Apr 2019 00:00:00 GMT
+Set-Cookie: WMF-Last-Access-Global=07-Mar-2019;Path=/;Domain=.wikipedia.org;HttpOnly;secure;Expires=Mon, 08 Apr 2019 00:00:00 GMT
+X-Client-Ip: 67.180.215.217
+Location: https://en.wikipedia.org/wiki/Michael_Lang_(footballer)
