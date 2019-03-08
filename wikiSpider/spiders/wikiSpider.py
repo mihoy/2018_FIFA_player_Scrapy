@@ -34,13 +34,12 @@ class wikiSpider(scrapy.Spider):
 
                     request = scrapy.Request(   
                         url = table_data['link'],            # use link from process_player_data
-                        callback=self.parse_bio,       # レスポンスを処理するコールバック関数を設定する
+                        callback=self.parse_bio,       # setting callback to process the response
                         dont_filter=True)
                     request.meta['item'] = WikispiderItem(**table_data)
                     print("request={0}".format(request.meta))
-                    #         # ノーベル賞データを保持するScrapyのItemを作成し、process_winner_liでスクレイピングしたデータで初期化する。
-                    #         # このItemデータをリクエストのメタデータに追加し、すべてのレスポンスからアクセスできるようにする。                         
-                    yield request   # リクエストを作成することでparseメソッドを消費可能なリクエストのジェネレーターにする
+                                             
+                    yield request  
                 
                     #yield table_data
             
@@ -50,11 +49,11 @@ class wikiSpider(scrapy.Spider):
     def parse_bio(self, response):
         print(response.meta)
         item = response.meta['item']
-        href = response.xpath("//li[@id='t-wikibase']/a/@href").extract() # 図6-5で特定したｳｨｷﾍﾃﾞｨﾞｰｱﾃﾞｰﾀへのリンクを抽出する
+        href = response.xpath("//li[@id='t-wikibase']/a/@href").extract()
         
         if href:
             request = scrapy.Request(href[0], callback=self.parse_wikidata, dont_filter=True)
-                        # ウィキデータリンクを使い、コールバックとしてスパイダーのparse_wikipediaを指定したリクエストを作成してレスポンスに対応する            
+                        
             request.meta['item'] = item
             yield request
             
@@ -65,10 +64,10 @@ class wikiSpider(scrapy.Spider):
         print(response.meta)
         item = response.meta['item']
 
-        property_codes = [ #プロパティコード。ScrapyアイテムWikispiderItemのフィールドに対応する名前を持つ。True_link属性を持つプロパティは<a>タグに含まれる
+        property_codes = [ 
             {'name': 'citizenship', 'code':'P27', 'link':True},
             {'name':'mass', 'code':'P2067'},
-            #{'name':'participated', 'code':'P1344', 'link':True}, #### can be a long list. need to work on
+            #{'name':'participated', 'code':'P1344', 'link':True},
             {'name':'height', 'code':'P2048'},
             {'name':'FIFAID', 'code':'P1469', 'link':True},
             {'name':'TransferMKT_ID', 'code':'P2446', 'link':True}
@@ -83,8 +82,7 @@ class wikiSpider(scrapy.Spider):
 
         #p_template = '//*[@id="{code}"]/div[2]/div[1]/div/div[2]/div[2]{link_html}/text()'
 
-        p_template = '//*[@id="{code}"]/div[2]/div/div/div[2]' \
-                     '/div[1]/div/div[2]/div[2]{link_html}/text()'
+        p_template = '//*[@id="{code}"]/div[2]/div/div/div[2]/div[1]/div/div[2]/div[2]{link_html}/text()'
 
         for prop in property_codes:
             
@@ -92,15 +90,14 @@ class wikiSpider(scrapy.Spider):
             if prop.get('link'):
                 link_html = '/div[1]/a'
             sel = response.xpath(p_template.format( \
-                code=prop['code'], link_html=link_html)) # 文字列テンプレートのformatメソッドを使って必要なプロパティコードの基づいたxpathを作成し、プロパティがリンクの場合は<a>タグを追加する
+                code=prop['code'], link_html=link_html)) 
             if sel:
                 item[prop['name']] = sel[0].extract()
         print(item)
         self.log("done: wikiitems")
         yield item
 
-        # 最後にアイテムを作成(yield)する。この時点でこのアイテムにはWikipediaから入手できるすべての対象データが含まれる
-
+        
 
         # //*[@id="P1469"]
         # //*[@id="Q523640$523453D6-D12C-4DC3-817B-EE65A76E7417"]/div[2]/div[1]/div/div[2]/div[2]/div[1]/a
