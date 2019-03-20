@@ -1,0 +1,5 @@
+*.DS_Store
+
+wikiSpider/__pycache__/
+
+wikiSpider/spiders/__pycache__/
